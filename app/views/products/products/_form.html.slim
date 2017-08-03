@@ -1,0 +1,18 @@
+= simple_form_for @product, as: :product, url: @product.persisted? ? product_path(@product) : products_path(@product) do |f|
+  = f.input :title
+
+  h3 Varianty produktu
+  - if @product.persisted?
+    .variants-inputs
+      = f.nested_fields_for :variants, f.object.variants.order(title: :asc) do |vf|
+        .form-inline style="margin-bottom: 5px;"
+          => vf.input :title, label: 'Názov varianty: '
+          = vf.remove_nested_fields_link 'Remove', class: 'btn btn-danger'
+
+    p = f.add_nested_fields_link :variants, 'Pridať novú variantu...', class: 'btn btn-primary btn-xs'
+  - else
+    .well Pred pridaním variánt musíte produkt uložiť!
+
+  p
+    => f.submit class: 'btn btn-primary'
+    => link_to 'Zrušiť', products_path, class: 'btn btn-default'

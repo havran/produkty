@@ -1,0 +1,10 @@
+p = link_to 'Na zoznam produktov', products_path, class: 'btn btn-default'
+
+h1 Produkt: #{@product.title}
+p
+  strong> ID:
+  = @product.id
+
+h3 Zoznam variánt produktu
+
+p = link_to 'Zmazať produkt', product_path(@product), method: :delete, data: { confirm: 'Ste si istý?' }, class: 'btn btn-danger'
