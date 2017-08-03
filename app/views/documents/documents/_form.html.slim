@@ -1,0 +1,19 @@
+= simple_form_for @document, as: :document, url: @document.persisted? ? document_path(@document) : documents_path(@document) do |f|
+  = f.error_notification
+  = f.input :title
+
+  h3 Položky dokladu
+  - if @document.persisted?
+    .variants-inputs
+      = f.nested_fields_for :items, f.object.items.order(title: :asc) do |vf|
+        .form-inline style="margin-bottom: 5px;"
+          => vf.association :variant, as: :grouped_select, collection: ::Products::Product.all, group_method: :variants, label: 'Názov položky: '
+          = vf.remove_nested_fields_link 'Remove', class: 'btn btn-danger'
+
+    p = f.add_nested_fields_link :items, 'Pridať novú položku...', class: 'btn btn-primary btn-xs'
+  - else
+    .well Pred pridaním položiek musíte produkt uložiť!
+
+  p
+    => f.submit class: 'btn btn-primary'
+    => link_to 'Zrušiť', documents_path, class: 'btn btn-default'

@@ -1,0 +1,22 @@
+p = link_to 'Na zoznam dokladov', documents_path, class: 'btn btn-default'
+
+h1 Doklad: #{@document.title}
+p
+  strong> ID:
+  = @document.id
+
+h3 Zoznam položiek dokladu
+- if @document.items.empty?
+  .well Pre tento doklad ešte neboli vytvorené žiadne položky.
+- else
+  table.table
+    thead
+      th ID
+      th Meno položky
+    tbody
+      - @document.items.each do |item|
+        tr class="item-#{item.id}"
+          th = item.id
+          td = link_to "#{item.variant.product.title}: #{item.variant.title}", product_path(item.variant.product, variant: item.variant.id)
+
+p = link_to 'Zmazať doklad', document_path(@document), method: :delete, data: { confirm: 'Ste si istý?' }, class: 'btn btn-danger'

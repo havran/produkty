@@ -1,0 +1,23 @@
+h1 Zoznam dokladov
+
+- if @documents.blank?
+  .well V databáze sa zatiaľ nenachádzajú žiadne doklady.
+- else
+  table.table
+    thead
+      tr
+        th ID
+        th Meno dokladu
+        th Položky
+        th
+    tbody
+      - @documents.each do |document|
+        tr
+          th = document.id
+          td = link_to document.title, document_path(document)
+          td = document.items.count
+          td
+            => link_to 'Upraviť', edit_document_path(document), class: 'btn btn-xs btn-default'
+            = link_to 'Zmazať', document_path(document), method: :delete, data: { confirm: 'Ste si istý?' }, class: 'btn btn-xs btn-danger'
+
+= link_to 'Pridať nový doklad', new_document_path, class: 'btn btn-default'

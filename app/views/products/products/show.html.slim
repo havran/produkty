@@ -1,3 +1,18 @@
+scss:
+  @keyframes anim {
+    from {
+      background-color: red;
+    }
+    to {
+      background-color: inherit;
+    }
+  }
+
+  tr.selected {
+    background-color: lightcoral;
+    animation: anim 1s 3;
+  }
+
 p = link_to 'Na zoznam produktov', products_path, class: 'btn btn-default'
 
 h1 Produkt: #{@product.title}
@@ -6,5 +21,17 @@ p
   = @product.id
 
 h3 Zoznam variánt produktu
+- if @product.variants.empty?
+  .well Pre tento produkt ešte neboli vytvorené žiadne varianty.
+- else
+  table.table
+    thead
+      th ID
+      th Meno varianty
+    tbody
+      - @product.variants.each do |variant|
+        tr class="variant-#{variant.id} #{if params[:variant] == variant.id.to_s then 'selected'}"
+          th = variant.id
+          td = variant.title
 
 p = link_to 'Zmazať produkt', product_path(@product), method: :delete, data: { confirm: 'Ste si istý?' }, class: 'btn btn-danger'
