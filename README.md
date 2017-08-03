@@ -1,4 +1,4 @@
-# produkty
+# Produkty
 Ruby on Rails demo aplikácia
 
 Modely a vazby
