@@ -1,0 +1,21 @@
+h1 Zoznam produktov
+
+- if @products.blank?
+  .well V databáze sa zatiaľ nenachádzajú žiadne produkty.
+- else
+  table.table
+    thead
+      tr
+        th ID
+        th Meno produktu
+        th
+    tbody
+      - @products.each do |product|
+        tr
+          th = product.id
+          td = product.title
+          td
+            => link_to 'Upraviť', edit_product_path(product), class: 'btn btn-xs btn-default'
+            = link_to 'Zmazať', product_path(product), method: :delete, data: { confirm: 'Ste si istý?' }, class: 'btn btn-xs btn-danger'
+
+  = link_to 'Pridať nový produkt', new_product_path, class: 'btn btn-default'
