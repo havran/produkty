@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170803073733) do
   enable_extension "plpgsql"
 
   create_table "documents_documents", force: :cascade do |t|
-    t.text     "title"
+    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170803073733) do
   create_table "documents_items", force: :cascade do |t|
     t.integer  "documents_document_id"
     t.integer  "products_variant_id"
-    t.text     "title"
+    t.string   "title"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["documents_document_id"], name: "index_documents_items_on_documents_document_id", using: :btree
@@ -32,14 +32,14 @@ ActiveRecord::Schema.define(version: 20170803073733) do
   end
 
   create_table "products_products", force: :cascade do |t|
-    t.text     "title"
+    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "products_variants", force: :cascade do |t|
     t.integer  "products_product_id"
-    t.text     "title"
+    t.string   "title"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.index ["products_product_id"], name: "index_products_variants_on_products_product_id", using: :btree
