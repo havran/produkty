@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim'
 gem 'slim-rails'
 gem 'simple_form'
+gem 'nested_form_fields'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
